@@ -17,7 +17,7 @@
 			<input type="text" id="author" placeholder="Author" />
 			<input type="text" id="topic" placeholder="Topic" />
 			<input type="button" id="insert" value="Create book" onClick="createBook()" />
-			<div id="text" style="clear:both;display:block;"></div>
+			<div id="bookList" style="clear:both;display:block;"></div>
 		</div>
 		<script type="text/javascript">
 			function createBook(){
@@ -29,7 +29,7 @@
 				document.getElementById("topic").value = "";
 				document.getElementById("successCreate").style.display="";
 				setTimeout(function(){document.getElementById("successCreate").style.display="none";}, 3000);
-				var div = document.getElementById("text");
+				var div = document.getElementById("bookList");
 				while (div.firstChild){
 					div.removeChild(div.firstChild);
 				}
@@ -41,7 +41,7 @@
 				books.remove(new Book(id));
 				document.getElementById("successRemove").style.display="";
 				setTimeout(function(){document.getElementById("successRemove").style.display="none";}, 3000);
-				var div = document.getElementById("text");
+				var div = document.getElementById("bookList");
 				while (div.firstChild){
 					div.removeChild(div.firstChild);
 				}
