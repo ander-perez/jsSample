@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+	<head>
+		<script type="text/javascript" src="Stack.js" ></script>
+		<script type="text/javascript" src="Book.js" ></script>
+		<script type="text/javascript">
+			var books = new Stack(booksAreEqual, printBook);
+		</script>
+	</head>
+	<body>
+		<div id="content" style="text-align:center">
+			<div id="successCreate" style="display:none; background-color:green;">Book added succesfully</div>
+			<div id="successRemove" style="display:none; background-color:red;">Book removed succesfully</div>
+			<input type="text" id="bookId" placeholder="Identifier" />
+			<input type="text" id="title" placeholder="Title" />
+			<input type="text" id="author" placeholder="Author" />
+			<input type="text" id="topic" placeholder="Topic" />
+			<input type="button" id="insert" value="Create book" onClick="createBook()" />
+			<div id="text" style="clear:both;display:block;"></div>
+		</div>
+		<script type="text/javascript">
+			function createBook(){
+				var b = new Book(document.getElementById("bookId").value,document.getElementById("title").value,document.getElementById("author").value,document.getElementById("topic").value);
+				books.push(b);
+				document.getElementById("bookId").value = "";
+				document.getElementById("title").value = "";
+				document.getElementById("author").value = "";
+				document.getElementById("topic").value = "";
+				document.getElementById("successCreate").style.display="";
+				setTimeout(function(){document.getElementById("successCreate").style.display="none";}, 3000);
+				var div = document.getElementById("text");
+				while (div.firstChild){
+					div.removeChild(div.firstChild);
+				}
+				books.printValues(div);
+			}
+			function removeBook(id){
+				var book = document.getElementById("book_"+id);
+				book.parentNode.removeChild(book);
+				books.remove(new Book(id));
+				document.getElementById("successRemove").style.display="";
+				setTimeout(function(){document.getElementById("successRemove").style.display="none";}, 3000);
+				var div = document.getElementById("text");
+				while (div.firstChild){
+					div.removeChild(div.firstChild);
+				}
+				books.printValues(div);
+			}
+		</script>
+	</body>
+</html>
